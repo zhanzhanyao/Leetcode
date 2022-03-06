@@ -28,6 +28,27 @@ class DoublePoint:
             else:
                 return [slow + 1, fast + 1]
 
+    def judge_squaresum(self, c: int) -> bool:
+        """
+        Sum of Square Numbers
+        :param c: given a non-nagative integer.
+        :return: whether there're two integers a and b such that a^2 + b^2 = c
+        >>> DoublePoint().judge_squaresum(c=10)
+        True
+        >>> DoublePoint().judge_squaresum(c=3)
+        False
+        """
+        slow, fast = 0, c
+        while slow < fast:
+            result = slow**2 + fast**2
+            if result < c:
+                slow += 1
+            elif result > c:
+                fast -= 1
+            else:
+                return True
+        return False
+
 
 if __name__ == "__main__":
     import doctest
