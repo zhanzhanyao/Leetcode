@@ -107,6 +107,35 @@ class DoublePoint:
                 return is_palindrome(slow + 1, fast) or is_palindrome(slow, fast - 1)
         return True
 
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> List[int]:
+        """
+        Merge sorted array
+        :param nums1: non-decreasing order
+        :param m: the number of nums1, exclude 0 in the end of nums1
+        :param nums2: non-decreasing order
+        :param n:  the number of nums2
+        :return: merge num1 and num2 into num1 sorted in non-decreasing order.
+
+        >>> DoublePoint().merge(nums1=[1,2,3,0,0,0], m=3, nums2=[2,5,6], n=3)
+        [1, 2, 2, 3, 5, 6]
+        >>> DoublePoint().merge(nums1=[1], m=1, nums2=[], n=0)
+        [1]
+        >>> DoublePoint().merge(nums1=[0], m=0, nums2=[1], n=1)
+        [1]
+        """
+        if m == 0:
+            return nums2
+        elif n == 0:
+            return nums1
+        else:
+            slow, fast = m-1, n-1
+            while slow >= 0:
+                while nums1[slow] <= nums2[fast] and fast >= 0:
+                    nums1.insert(slow+1, nums2[fast])
+                    fast -= 1
+                slow -= 1
+            return nums1[0: m+n]
+
 
 if __name__ == "__main__":
     import doctest
