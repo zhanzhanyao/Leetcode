@@ -123,7 +123,7 @@ class DoublePoint:
         >>> DoublePoint().merge(nums1=[0], m=0, nums2=[1], n=1)
         [1]
         """
-        slow, fast = m-1, n-1
+        slow, fast = m - 1, n - 1
         tail = m + n - 1
         while slow >= 0 or fast >= 0:
             if slow == -1:
@@ -139,9 +139,6 @@ class DoublePoint:
                 nums1[tail] = nums2[fast]
                 fast -= 1
             tail -= 1
-
-
-
         return nums1
 
 
