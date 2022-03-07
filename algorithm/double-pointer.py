@@ -123,18 +123,26 @@ class DoublePoint:
         >>> DoublePoint().merge(nums1=[0], m=0, nums2=[1], n=1)
         [1]
         """
-        if m == 0:
-            return nums2
-        elif n == 0:
-            return nums1
-        else:
-            slow, fast = m-1, n-1
-            while slow >= 0:
-                while nums1[slow] <= nums2[fast] and fast >= 0:
-                    nums1.insert(slow+1, nums2[fast])
-                    fast -= 1
+        slow, fast = m-1, n-1
+        tail = m + n - 1
+        while slow >= 0 or fast >= 0:
+            if slow == -1:
+                nums1[tail] = nums2[fast]
+                fast -= 1
+            elif fast == -1:
+                nums1[tail] = nums1[slow]
                 slow -= 1
-            return nums1[0: m+n]
+            elif nums1[slow] > nums2[fast]:
+                nums1[tail] = nums1[slow]
+                slow -= 1
+            else:
+                nums1[tail] = nums2[fast]
+                fast -= 1
+            tail -= 1
+
+
+
+        return nums1
 
 
 if __name__ == "__main__":
