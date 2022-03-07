@@ -62,7 +62,7 @@ class DoublePoint:
         >>> DoublePoint().reverse_vowels(s='leetcode')
         'leotcede'
         """
-        vowels = set('aeiouAEIOU')
+        vowels = set("aeiouAEIOU")
         slow, fast = 0, len(s) - 1
         s = list(s)
         while slow < fast:
@@ -75,6 +75,37 @@ class DoublePoint:
             else:
                 slow += 1
         return "".join(s)
+
+    def valid_palindrome(self, s: str) -> bool:
+        """
+        Valid palindrome
+        :param s: given a string s
+        :return: return true if the s can be palindrome after deleting at most one character.
+
+        >>> DoublePoint().valid_palindrome(s='aba')
+        True
+        >>> DoublePoint().valid_palindrome(s='abca')
+        True
+        >>> DoublePoint().valid_palindrome(s='abc')
+        False
+        """
+
+        def is_palindrome(i, j) -> bool:
+            while i < j:
+                if s[i] != s[j]:
+                    return False
+                i += 1
+                j -= 1
+            return True
+
+        slow, fast = 0, len(s) - 1
+        while slow <= fast:
+            if s[slow] == s[fast]:
+                slow += 1
+                fast -= 1
+            else:
+                return is_palindrome(slow + 1, fast) or is_palindrome(slow, fast - 1)
+        return True
 
 
 if __name__ == "__main__":
