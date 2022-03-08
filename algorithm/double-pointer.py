@@ -141,6 +141,27 @@ class DoublePoint:
             tail -= 1
         return nums1
 
+    def find_longestword(self, s: str, dictionary: List[str]) -> str:
+        """
+        Longest word in dictionary through deleting
+        :param s:
+        :param dictionary:
+        :return: the longest string in the dictionary that can be formed by deleting some of the given string characters.
+
+        >>> DoublePoint().find_longestword(s="abpcplea", dictionary=["ale","apple","monkey","plea"])
+        "apple"
+        >>> DoublePoint().find_longestword(s="abpcplea", dictionary=["a","b","c"])
+        "a"
+        """
+        for word in dictionary:
+            slow, fast = 0, 0
+            while slow < len(s) and fast < len(word):
+                if s[slow] == word[fast]:
+                    fast += 1
+                slow += 1
+            if fast == len(word):
+                pass
+
 
 if __name__ == "__main__":
     import doctest

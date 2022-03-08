@@ -40,6 +40,29 @@ def two_sum(nums: List[int], target: int) -> List[int]:
     #     slow += 1
 
 
+def remove_duplicates(nums: List[int]) -> int:
+    """
+    Remove duplicates from sorted array
+
+    :param nums: an integer array sorted by non-decreasing order
+    :return: the length of unique elements
+
+    >>> remove_duplicates(nums=[1, 1, 2, 2])
+    2
+    >>> remove_duplicates(nums=[0, 0, 1, 1, 1, 2, 2, 3, 3, 4])
+    5
+    """
+    slow = len(nums) - 1
+    fast = slow - 1
+    while slow >= 0 and fast >= 0:
+        if nums[slow] == nums[fast]:
+            nums.pop(slow)
+            fast -= 1
+        slow -= 1
+        fast = slow - 1
+    return len(nums)
+
+
 if __name__ == "__main__":
     import doctest
 
