@@ -63,6 +63,30 @@ def remove_duplicates(nums: List[int]) -> int:
     return len(nums)
 
 
+def sorted_squares(nums: List[int]) -> List[int]:
+    """
+    Squares of a sorted array
+
+    :param nums: given an integer array nums sorted in non-decreasing order
+    :return: an array of the squares of each number sorted in non-decreasing.
+
+    >>> sorted_squares(nums=[-4, -1, 0, 3, 10])
+    [0, 1, 9, 16, 100]
+    >>> sorted_squares(nums=[-7, -3, 2, 3, 11])
+    [4, 9, 9, 49, 121]
+    """
+    slow, fast = 0, len(nums) - 1
+    output = [0] * len(nums)
+    while slow <= fast:
+        if abs(nums[slow]) <= abs(nums[fast]):
+            output[fast - slow] = nums[fast] ** 2
+            fast -= 1
+        elif abs(nums[slow]) > abs(nums[fast]):
+            output[fast - slow] = nums[slow] ** 2
+            slow += 1
+    return output
+
+
 if __name__ == "__main__":
     import doctest
 
