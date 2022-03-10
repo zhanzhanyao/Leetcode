@@ -87,6 +87,44 @@ def sorted_squares(nums: List[int]) -> List[int]:
     return output
 
 
+def three_sum(nums: List[int]) -> List[List[int]]:
+    """
+    Three sum
+
+    :param nums: given an integer array
+    :return: all the  triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+    >>> three_sum(nums=[-1, 0, 1, 2, -1, -4])
+    [(-1, -1, 2), (-1, 0, 1)]
+    >>> three_sum(nums=[])
+    []
+    >>> three_sum(nums=[0])
+    []
+    """
+    nums.sort()
+    ans = []
+    for i in range(len(nums)):
+        if i > 0 and nums[i] == nums[i - 1]:
+            continue
+        slow = i + 1
+        fast = len(nums) - 1
+        while slow < fast:
+            curr_sum = nums[i] + nums[slow] + nums[fast]
+            if curr_sum == 0:
+                ans.append((nums[i], nums[slow], nums[fast]))
+                slow += 1
+                fast -= 1
+                while slow < fast and nums[slow] == nums[slow - 1]:
+                    slow += 1
+                while slow < fast and nums[fast] == nums[fast + 1]:
+                    fast -= 1
+            elif curr_sum < 0:
+                slow += 1
+            else:
+                fast -= 1
+    return ans
+
+
 if __name__ == "__main__":
     import doctest
 
