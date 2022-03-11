@@ -125,6 +125,40 @@ def three_sum(nums: List[int]) -> List[List[int]]:
     return ans
 
 
+def three_sum_closest(nums: List[int], target: int) -> int:
+    """
+    Three sum closest
+
+    :param nums: given an integer array nums
+    :param target: integer target
+    :return: find three integers in nums such that the sum is closest to target and return the sum.
+
+    >>> three_sum_closest(nums=[-1, 2, 1, -4], target=1)
+    2
+    >>> three_sum_closest(nums=[0, 0, 0], target=1)
+    0
+    >>> three_sum_closest(nums=[1, 1, -1], target=1)
+    1
+    """
+    nums.sort()
+    result = nums[0] + nums[1] +nums[2]
+    for i in range(len(nums)):
+        slow = i + 1
+        fast = len(nums) - 1
+        while slow < fast:
+            sum = nums[i] + nums[slow] + nums[fast]
+            if sum == target:
+                return sum
+            if abs(sum - target) < abs(result - target):
+                result = sum
+
+            if sum < target:
+                slow += 1
+            elif sum > target:
+                fast -= 1
+    return result
+
+
 if __name__ == "__main__":
     import doctest
 
