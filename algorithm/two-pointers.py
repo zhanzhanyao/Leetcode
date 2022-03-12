@@ -159,6 +159,33 @@ def three_sum_closest(nums: List[int], target: int) -> int:
     return result
 
 
+def subarray_product_less_than_k(nums: List[int], k: int) -> int:
+    """
+    Nums subarray product less than k
+
+    :param nums: an array of integers
+    :param k: an integers
+    :return: the number of contiguous subarrays where the product of all the elements in the subarray is strictly less than k.
+
+    >>> subarray_product_less_than_k(nums=[10,5,2,6],k=100)
+    8
+    >>> subarray_product_less_than_k(nums=[1,2,3],k=0)
+    0
+    """
+    slow = 0
+    res = 0
+    prod = 1
+    for fast in range(len(nums)):
+        prod *= nums[fast]
+
+        while prod >= k and slow <= fast:
+            prod /= nums[slow]
+            slow += 1
+
+        res += fast - slow + 1
+    return res
+
+
 if __name__ == "__main__":
     import doctest
 
