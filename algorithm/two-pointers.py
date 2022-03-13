@@ -214,6 +214,59 @@ def sort_colors(nums: List[int]) -> None:
     return nums
 
 
+def four_sum(nums: List[int], target: int) -> List[List[int]]:
+    """
+    Four nums
+
+    :param nums: given an integer array
+    :param target: nums[a] + nums[b] + nums[c] + nums[d] == target
+    :return: an array of all the unique quadruplets
+
+    >>> four_sum(nums=[1,0,-1,0,-2,2], target=0)
+    [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+    >>> four_sum(nums=[2,2,2,2], target=8)
+    [[2,2,2,2]]
+    """
+    pass
+
+
+def backspace_compare(s: str, t: str) -> bool:
+    """
+    Backspace string compare
+
+    :param s: a string maybe has backspace #
+    :param s: a string maybe has backspace #
+    :return:  return true if they are equal when both are typed into empty text editors
+
+    >>> backspace_compare(s="ab#c",t="ad#c")
+    True
+    >>> backspace_compare(s="ab##",t="c#d#")
+    True
+    >>> backspace_compare(s="a#c",t="b")
+    False
+    """
+    scounter, tcounter = 0, 0
+    sfast, tfast = len(s)-1, len(t)-1
+    while sfast >= 0 or tfast >= 0:
+        while sfast >= 0 and (s[sfast] == "#" or scounter):
+            if s[sfast] == "#":
+                scounter += 1
+            else:
+                scounter -= 1
+            sfast -= 1
+        while tfast >= 0 and (t[tfast] == "#" or tcounter):
+            if t[tfast] == "#":
+                tcounter += 1
+            else:
+                tcounter -= 1
+            tfast -= 1
+        if s[sfast] != t[tfast]:
+            return False
+        sfast -= 1
+        tfast -= 1
+    return True
+
+
 if __name__ == "__main__":
     import doctest
 
