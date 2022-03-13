@@ -141,7 +141,7 @@ def three_sum_closest(nums: List[int], target: int) -> int:
     1
     """
     nums.sort()
-    result = nums[0] + nums[1] +nums[2]
+    result = nums[0] + nums[1] + nums[2]
     for i in range(len(nums)):
         slow = i + 1
         fast = len(nums) - 1
@@ -159,7 +159,7 @@ def three_sum_closest(nums: List[int], target: int) -> int:
     return result
 
 
-def subarray_product_less_than_k(nums: List[int], k: int) -> int:
+def subarray_product(nums: List[int], k: int) -> int:
     """
     Nums subarray product less than k
 
@@ -167,9 +167,9 @@ def subarray_product_less_than_k(nums: List[int], k: int) -> int:
     :param k: an integers
     :return: the number of contiguous subarrays where the product of all the elements in the subarray is strictly less than k.
 
-    >>> subarray_product_less_than_k(nums=[10,5,2,6],k=100)
+    >>> subarray_product(nums=[10,5,2,6],k=100)
     8
-    >>> subarray_product_less_than_k(nums=[1,2,3],k=0)
+    >>> subarray_product(nums=[1,2,3],k=0)
     0
     """
     slow = 0
@@ -184,6 +184,34 @@ def subarray_product_less_than_k(nums: List[int], k: int) -> int:
 
         res += fast - slow + 1
     return res
+
+
+def sort_colors(nums: List[int]) -> None:
+    """
+    sort colors in-places so that objects of the same color are adjacent.
+
+    :param nums: an array nums in which the 0, 1, 2 represent the color red, white ,and blue.
+    :return: sorted nums
+
+    >>> sort_colors(nums=[2,0,2,1,1,0])
+    [0, 0, 1, 1, 2, 2]
+    >>> sort_colors(nums=[2,0,1])
+    [0, 1, 2]
+    """
+    slow, mid, fast = 0, 0, len(nums) - 1
+
+    while mid <= fast:
+        if nums[mid] == 0:
+            nums[slow], nums[mid] = nums[mid], nums[slow]
+            mid += 1
+            slow += 1
+        elif nums[mid] == 2:
+            nums[fast], nums[mid] = nums[mid], nums[fast]
+            mid += 1
+            fast -= 1
+        else:
+            mid += 1
+    return nums
 
 
 if __name__ == "__main__":
