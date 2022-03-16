@@ -1,6 +1,10 @@
 from typing import List
 
 
+# Two Pointers is working on sorted arrays or LinkedLists and finding a set of elements that fulfill certain constraints
+# The set of elements could be a pair, a triplet or even a subarray
+
+
 def two_sum(nums: List[int], target: int) -> List[int]:
     """
     Two sum
@@ -246,7 +250,7 @@ def backspace_compare(s: str, t: str) -> bool:
     False
     """
     scounter, tcounter = 0, 0
-    sfast, tfast = len(s)-1, len(t)-1
+    sfast, tfast = len(s) - 1, len(t) - 1
     while sfast >= 0 or tfast >= 0:
         while sfast >= 0 and (s[sfast] == "#" or scounter):
             if s[sfast] == "#":
